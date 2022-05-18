@@ -1,3 +1,4 @@
+// suggestion related to portion of code of the cell original program at : https://github.com/cell-org/c0/blob/main/contracts/C0.sol
 // about possible cell protocoll optimization
 // since the following code is inside a for loop, each optimization is amplified by the number of iterations.
 

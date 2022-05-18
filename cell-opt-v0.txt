@@ -21,15 +21,15 @@ if (relation.addr == address(0)) {
 	(relation.code == 1)?	require(burned[relation.id] == receiver, "8b"):					// 1. burned by receiver
 	(relation.code == 2)?	require(ownerOf(relation.id) == _msgSender(), "9a"):				// 2. owned by sender
 	(relation.code == 3)?	require(ownerOf(relation.id) == receiver, "9b"):				// 3. owned by receiver
-	(relation.code == 4)?	require(balanceOf(_msgSender()) >= relation.id, "10a"):				//  4. balance by sender
-				require(balanceOf(receiver) >= relation.id, "10b");				//  5. balance by receiver
+	(relation.code == 4)?	require(balanceOf(_msgSender()) >= relation.id, "10a"):				// 4. balance by sender
+				require(balanceOf(receiver) >= relation.id, "10b");				// 5. balance by receiver
 }else{
 	(relation.code == 0)?	require(IRelation(relation.addr).burned[relation.id] == _msgSender(), "8a"):		// 0. burned by sender
 	(relation.code == 1)?	require(IRelation(relation.addr).burned[relation.id] == receiver, "8b"):		// 1. burned by receiver
 	(relation.code == 2)?	require(IRelation(relation.addr).ownerOf(relation.id) == _msgSender(), "9a"):		// 2. owned by sender
 	(relation.code == 3)?	require(IRelation(relation.addr).ownerOf(relation.id) == receiver, "9b"):		// 3. owned by receiver
-	(relation.code == 4)?	require(IRelation(relation.addr).balanceOf(_msgSender()) >= relation.id, "10a"):	//  4. balance by sender
-				require(IRelation(relation.addr).balanceOf(receiver) >= relation.id, "10b");		//  5. balance by receiver
+	(relation.code == 4)?	require(IRelation(relation.addr).balanceOf(_msgSender()) >= relation.id, "10a"):	// 4. balance by sender
+				require(IRelation(relation.addr).balanceOf(receiver) >= relation.id, "10b");		// 5. balance by receiver
 }
 
 // or in alternative, with a further optimization if the number of relation.code should increase in future time
@@ -43,8 +43,8 @@ if (relation.addr == address(0)) {
 		(relation.code == 2)?	require(ownerOf(relation.id) == _msgSender(), "9a"):		// 2. owned by sender
 					require(ownerOf(relation.id) == receiver, "9b"):		// 3. owned by receiver
 	//(relation.code < 6)?
-		(relation.code == 4)?	require(balanceOf(_msgSender()) >= relation.id, "10a"):		//  4. balance by sender
-					require(balanceOf(receiver) >= relation.id, "10b");		//  5. balance by receiver
+		(relation.code == 4)?	require(balanceOf(_msgSender()) >= relation.id, "10a"):		// 4. balance by sender
+					require(balanceOf(receiver) >= relation.id, "10b");		// 5. balance by receiver
 }else{
 	(relation.code < 2)?
 		(relation.code == 0)?	require(IRelation(relation.addr).burned[relation.id] == _msgSender(), "8a"):		// 0. burned by sender
@@ -53,8 +53,8 @@ if (relation.addr == address(0)) {
 		(relation.code == 2)?	require(IRelation(relation.addr).ownerOf(relation.id) == _msgSender(), "9a"):		// 2. owned by sender
 					require(IRelation(relation.addr).ownerOf(relation.id) == receiver, "9b"):		// 3. owned by receiver
 	//(relation.code < 6)?
-		(relation.code == 4)?	require(IRelation(relation.addr).balanceOf(_msgSender()) >= relation.id, "10a"):	//  4. balance by sender
-					require(IRelation(relation.addr).balanceOf(receiver) >= relation.id, "10b");		//  5. balance by receiver
+		(relation.code == 4)?	require(IRelation(relation.addr).balanceOf(_msgSender()) >= relation.id, "10a"):	// 4. balance by sender
+					require(IRelation(relation.addr).balanceOf(receiver) >= relation.id, "10b");		// 5. balance by receiver
 }
 
 

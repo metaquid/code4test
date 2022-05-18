@@ -1,5 +1,6 @@
 // suggestion related to portion of code of the cell original program at : https://github.com/cell-org/c0/blob/main/contracts/C0.sol
 // about possible cell protocoll optimization
+// *PROPOSED-CODE-1* and *PROPOSED-CODE-2* as an alternative to *ORIGINAL-CODE*
 // since the following code is inside a for loop, each optimization is amplified by the number of iterations.
 
 // relation.code :=
@@ -10,7 +11,7 @@
 //    4. balance by sender
 //    5. balance by receiver
 //
-// PROPOSED CODE 1
+// *PROPOSED-CODE-1*
 if (relation.addr == address(0)) {
 	(relation.code == 0)?	require(burned[relation.id] == _msgSender(), "8a"):				// 0. burned by sender
 	(relation.code == 1)?	require(burned[relation.id] == receiver, "8b"):					// 1. burned by receiver
@@ -29,7 +30,7 @@ if (relation.addr == address(0)) {
 
 // or in alternative, with a further optimization if the number of relation.code should increase in future time
 
-// PROPOSED CODE 2
+// *PROPOSED-CODE-2*
 if (relation.addr == address(0)) {
 	(relation.code < 2)?
 		(relation.code == 0)?	require(burned[relation.id] == _msgSender(), "8a"):		// 0. burned by sender
@@ -56,7 +57,7 @@ if (relation.addr == address(0)) {
 
 // suggestion related to portion of code of the original program at : https://github.com/cell-org/c0/blob/main/contracts/C0.sol
 
-// ORIGINAL CODE
+// *ORIGINAL-CODE*
           //
           // relation.code :=
           //    0: burned by sender

@@ -1,6 +1,14 @@
 // about possible cell protocoll optimization
 // since the following code is inside a for loop, each optimization is amplified by the number of iterations.
 
+// relation.code :=
+//    0: burned by sender
+//    1: burned by receiver
+//    2: owned by sender
+//    3: owned by receiver
+//    4. balance by sender
+//    5. balance by receiver
+
 if (relation.addr == address(0)) {
 	(relation.code == 0)?	require(burned[relation.id] == _msgSender(), "8a"):				// 0. burned by sender
 	(relation.code == 1)?	require(burned[relation.id] == receiver, "8b"):					// 1. burned by receiver

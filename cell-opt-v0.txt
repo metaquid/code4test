@@ -1,5 +1,6 @@
 // suggestion related to portion of code of the cell original program at : https://github.com/cell-org/c0/blob/main/contracts/C0.sol
 // about possible cell protocoll optimization
+// Note 1: if the require() message is the empty string '' we can save 7600 wei of codeDepositCost and 6 wei of executionCost, for a total of 7606 wei.
 // *PROPOSED-CODE-1* and *PROPOSED-CODE-2* as an alternative to *ORIGINAL-CODE*
 // since the following code is inside a for loop, each optimization is amplified by the number of iterations.
 

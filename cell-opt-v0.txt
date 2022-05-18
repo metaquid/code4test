@@ -53,9 +53,10 @@ if (relation.addr == address(0)) {
 }
 
 
-// ORIGINAL CODE
+
 // suggestion related to portion of code of the original program at : https://github.com/cell-org/c0/blob/main/contracts/C0.sol
 
+// ORIGINAL CODE
           //
           // relation.code :=
           //    0: burned by sender

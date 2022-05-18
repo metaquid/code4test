@@ -9,7 +9,8 @@
 //    3: owned by receiver
 //    4. balance by sender
 //    5. balance by receiver
-
+//
+// PROPOSED CODE 1
 if (relation.addr == address(0)) {
 	(relation.code == 0)?	require(burned[relation.id] == _msgSender(), "8a"):				// 0. burned by sender
 	(relation.code == 1)?	require(burned[relation.id] == receiver, "8b"):					// 1. burned by receiver
@@ -28,6 +29,7 @@ if (relation.addr == address(0)) {
 
 // or in alternative, with a further optimization if the number of relation.code should increase in future time
 
+// PROPOSED CODE 2
 if (relation.addr == address(0)) {
 	(relation.code < 2)?
 		(relation.code == 0)?	require(burned[relation.id] == _msgSender(), "8a"):		// 0. burned by sender
@@ -51,7 +53,7 @@ if (relation.addr == address(0)) {
 }
 
 
-
+// ORIGINAL CODE
 // suggestion related to portion of code of the original program at : https://github.com/cell-org/c0/blob/main/contracts/C0.sol
 
           //

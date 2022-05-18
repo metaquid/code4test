@@ -17,7 +17,7 @@ if (relation.addr == address(0)) {
 				require(IRelation(relation.addr).balanceOf(receiver) >= relation.id, "10b");		//  5. balance by receiver
 }
 
-// or in alternative, with a further optimization if the number of relation.code should increase
+// or in alternative, with a further optimization if the number of relation.code should increase in future time
 
 if (relation.addr == address(0)) {
 	(relation.code < 2)?
@@ -40,3 +40,69 @@ if (relation.addr == address(0)) {
 		(relation.code == 4)?	require(IRelation(relation.addr).balanceOf(_msgSender()) >= relation.id, "10a"):	//  4. balance by sender
 					require(IRelation(relation.addr).balanceOf(receiver) >= relation.id, "10b");		//  5. balance by receiver
 }
+
+
+
+// suggestion related to portion of code of the original program at : https://github.com/cell-org/c0/blob/main/contracts/C0.sol
+
+          //
+          // relation.code :=
+          //    0: burned by sender
+          //    1: burned by receiver
+          //    2: owned by sender
+          //    3: owned by receiver
+          //    4. balance by sender
+          //    5. balance by receiver
+          //
+
+          // 0. burned by sender
+          if (relation.code == 0) {
+            if (relation.addr == address(0)) {
+              require(burned[relation.id] == _msgSender(), "8a");
+            } else {
+              require(IRelation(relation.addr).burned(relation.id) == _msgSender(), "8a");
+            }
+          }
+          // 1. burned by receiver
+          else if (relation.code == 1) {
+            if (relation.addr == address(0)) {
+              require(burned[relation.id] == receiver, "8b");
+            } else {
+              require(IRelation(relation.addr).burned(relation.id) == receiver, "8b");
+            }
+          }
+          // 2. owned by sender
+          else if (relation.code == 2) {
+            if (relation.addr == address(0)) {
+              require(ownerOf(relation.id) == _msgSender(), "9a");
+            } else {
+              require(IRelation(relation.addr).ownerOf(relation.id) == _msgSender(), "9a");
+            }
+          }
+          // 3. owned by receiver
+          else if (relation.code == 3) {
+            if (relation.addr == address(0)) {
+              require(ownerOf(relation.id) == receiver, "9b");
+            } else {
+              require(IRelation(relation.addr).ownerOf(relation.id) == receiver, "9b");
+            }
+          }
+          //  4. balance by sender
+          else if (relation.code == 4) {
+            if (relation.addr == address(0)) {
+              require(balanceOf(_msgSender()) >= relation.id, "10a");
+            } else {
+              require(IRelation(relation.addr).balanceOf(_msgSender()) >= relation.id, "10a");
+            }
+          }
+          //  5. balance by receiver
+          else if (relation.code == 5) {
+            if (relation.addr == address(0)) {
+              require(balanceOf(receiver) >= relation.id, "10b");
+            } else {
+              require(IRelation(relation.addr).balanceOf(receiver) >= relation.id, "10b");
+            }
+          }
+
+
+

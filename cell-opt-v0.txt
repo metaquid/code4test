@@ -5,7 +5,7 @@
 //         Basically the only way the system crashes with the empty "" error message is just one, like any other message, such as "8a".
 //
 // *PROPOSED-CODE-1* , *PROPOSED-CODE-2* , *PROPOSED-CODE-3* as an alternative to *ORIGINAL-CODE*
-// Note 2: I am not sure about the syntax of code 1 and code 2 because is nested ternary operator structure
+// Note 2: I am not sure about the syntax of code 1 because is nested ternary operator structure
 //
 // since the following code is inside a for loop, each optimization is amplified by the number of iterations.
 
@@ -42,25 +42,27 @@ if (relation.addr == address(0)) {
 
 // *PROPOSED-CODE-2*
 if (relation.addr == address(0)) {
-	(relation.code < 2)?
+	if(relation.code < 2){
 		(relation.code == 0)?	require(burned[relation.id] == _msgSender(), "8a"):		// 0. burned by sender
-					require(burned[relation.id] == receiver, "8b"):			// 1. burned by receiver
-	(relation.code < 4)?
+					require(burned[relation.id] == receiver, "8b");			// 1. burned by receiver
+	}else if(relation.code < 4){
 		(relation.code == 2)?	require(ownerOf(relation.id) == _msgSender(), "9a"):		// 2. owned by sender
-					require(ownerOf(relation.id) == receiver, "9b"):		// 3. owned by receiver
-	//(relation.code < 6)?
+					require(ownerOf(relation.id) == receiver, "9b");		// 3. owned by receiver
+	}else{ //(relation.code < 6)
 		(relation.code == 4)?	require(balanceOf(_msgSender()) >= relation.id, "10a"):		// 4. balance by sender
 					require(balanceOf(receiver) >= relation.id, "10b");		// 5. balance by receiver
+	}
 }else{
-	(relation.code < 2)?
+	if(relation.code < 2){
 		(relation.code == 0)?	require(IRelation(relation.addr).burned[relation.id] == _msgSender(), "8a"):		// 0. burned by sender
-					require(IRelation(relation.addr).burned[relation.id] == receiver, "8b"):		// 1. burned by receiver
-	(relation.code < 4)?	
+					require(IRelation(relation.addr).burned[relation.id] == receiver, "8b");		// 1. burned by receiver
+	}else if(relation.code < 4){	
 		(relation.code == 2)?	require(IRelation(relation.addr).ownerOf(relation.id) == _msgSender(), "9a"):		// 2. owned by sender
-					require(IRelation(relation.addr).ownerOf(relation.id) == receiver, "9b"):		// 3. owned by receiver
-	//(relation.code < 6)?
+					require(IRelation(relation.addr).ownerOf(relation.id) == receiver, "9b");		// 3. owned by receiver
+	}else{ //(relation.code < 6)
 		(relation.code == 4)?	require(IRelation(relation.addr).balanceOf(_msgSender()) >= relation.id, "10a"):	// 4. balance by sender
 					require(IRelation(relation.addr).balanceOf(receiver) >= relation.id, "10b");		// 5. balance by receiver
+	}
 }
 
 

@@ -5,7 +5,6 @@
 //         Basically the only way the system crashes with the empty "" error message is just one, like any other message, such as "8a".
 //
 // *PROPOSED-CODE-1* , *PROPOSED-CODE-2* , *PROPOSED-CODE-3* as an alternative to *ORIGINAL-CODE*
-// Note 2: I am not sure about the syntax of code 1 because is nested ternary operator structure
 //
 // since the following code is inside a for loop, each optimization is amplified by the number of iterations.
 
